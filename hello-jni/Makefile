@@ -24,7 +24,7 @@ build : ./bin/hellojni.apk
 	-I $(ANDROID_HOME)/platforms/android-23/android.jar -F $@ ./bin
 	$(ANDROID_HOME)/build-tools/23.0.3/aapt add $@ lib/arm64-v8a/libhello.so
 		
-./bin/classes.dex : ./obj/com/example/hellojni/HelloJni.class
+./bin/classes.dex : ./obj/com/example/hellojni/HelloJNI.class
 	$(ANDROID_HOME)/build-tools/23.0.3/dx --dex --verbose --output=$@ ./obj
 	
 ./lib/arm64-v8a/libhello.so : ./jni/hello.o
@@ -37,7 +37,7 @@ build : ./bin/hellojni.apk
 	$(ANDROID_HOME)/build-tools/23.0.3/aapt package -v -f -m  -S ./res -J ./src -M ./AndroidManifest.xml \
 	-I $(ANDROID_HOME)/platforms/android-23/android.jar
 
-./obj/com/example/hellojni/HelloJni.class : ./src/com/example/hellojni/HelloJni.java  ./src/com/example/hellojni/R.java
+./obj/com/example/hellojni/HelloJNI.class : ./src/com/example/hellojni/HelloJNI.java  ./src/com/example/hellojni/R.java
 	$(JAVA_HOME)/bin/javac -d ./obj -classpath $(ANDROID_HOME)/platforms/android-23/android.jar -sourcepath ./src $<
 	
 ./ToyKey.keystore : 
@@ -45,4 +45,4 @@ build : ./bin/hellojni.apk
 	-storepass armena -keypass armena -alias helljniKey -keyalg RSA -v
 	
 clean:
-	rm -f ./bin/* ./lib/arm64-v8a/* 
+	rm -f ./bin/* ./lib/arm64-v8a/*
